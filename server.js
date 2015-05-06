@@ -57,8 +57,8 @@ slack.on('message', function(message) {
     {
         send(text);
     }
-
   } 
+  
 });
 
 slack.on('error', function(error) {
