@@ -1,16 +1,17 @@
 var m_slack_config = require('./package').config.slack;
 
-//Require
+// Require
 var Slack = require('slack-client')
 var CleverBot = require('cleverbot-node');
 
-//For constants
+// For constants
 var BOT_TOKEN = m_slack_config.bot_token;
 
 var slack = new Slack(BOT_TOKEN, true, true)
 var mCleverBots = {};
 
-//Listeners
+//
+// Listeners
 slack.on('message', function(message) {
   var channel, channelType, user, type;
   
@@ -20,15 +21,13 @@ slack.on('message', function(message) {
   type = message.type;
   text = message.text;
   channelType = message.getChannelType();
-
-  // console.log(user + " | " + message.user + " | " + slack.self.id + " | " + (message.user != slack.self.id));
-
+  
   if (type === 'message' 
     && (text != null) 
     && (channel != null) 
     && (message.user != slack.self.id))
   {
-    //Send function
+    // Send
     var send = function(msg)
     {    
         //Get clever bot
@@ -38,13 +37,11 @@ slack.on('message', function(message) {
         {
             mCleverBots[key] = new CleverBot();
             cleverBot = mCleverBots[key];
-
         }
         //Send request to clever bot
         cleverBot.write(msg,function(resp)
         {            
              channel.send(resp['message']);
-            
         });  
 
     }
@@ -55,7 +52,6 @@ slack.on('message', function(message) {
     {       
         text = text.replace(tag, '');  
         send(text);
-
     }
     else if (channelType == 'DM')
     {
@@ -68,6 +64,7 @@ slack.on('message', function(message) {
 slack.on('error', function(error) {
   return console.error("Error: " + error);
 });
+
 
 //Login
 slack.login();
