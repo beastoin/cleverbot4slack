@@ -11,9 +11,9 @@
   "author": {
     "name": "natre",
     "email": "ngocthinhdp@gmail.com",
-    "url": "https://www.facebook.com/ngocthinhdp"
+    "url": "https://twitter.com/ngocthinhdp"
   },
-  "homepage": "https://www.facebook.com/ngocthinhdp",
+  "homepage": "hhttps://twitter.com/ngocthinhdp",
   "repository": {
     "type": "git",
     "url": "https://github.com/ngocthinhdp/cleverbot4slack"
@@ -26,8 +26,8 @@
 
   "dependencies": {
     "express": "~3.4.4",
-    "slack-client": "latest",
-    "cleverbot-node": "latest"
+    "slack-client": "*",
+    "cleverbot-node": "*"
   },
   "devDependencies": {},
   "bundleDependencies": [],
