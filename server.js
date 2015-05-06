@@ -7,16 +7,16 @@ var CleverBot = require('cleverbot-node');
 // For constants
 var BOT_TOKEN = m_slack_config.bot_token;
 
-var slack = new Slack(BOT_TOKEN, true, true)
+var mSlack = new Slack(BOT_TOKEN, true, true)
 var mCleverBots = {};
 
 //
 // Listeners
-slack.on('message', function(message) {
+mSlack.on('message', function(message) {
   var channel, channelType, user, type;
   
-  channel = slack.getChannelGroupOrDMByID(message.channel);
-  user = slack.getUserByID(message.user);
+  channel = mSlack.getChannelGroupOrDMByID(message.channel);
+  user = mSlack.getUserByID(message.user);
 
   type = message.type;
   text = message.text;
@@ -25,7 +25,7 @@ slack.on('message', function(message) {
   if (type === 'message' 
     && (text != null) 
     && (channel != null) 
-    && (message.user != slack.self.id))
+    && (message.user != mSlack.self.id))
   {
     // Send
     var send = function(msg)
@@ -47,7 +47,7 @@ slack.on('message', function(message) {
     }
 
     //Check if bot is tagged || message is directed to bot
-    var tag = '<@' + slack.self.id + '>';
+    var tag = '<@' + mSlack.self.id + '>';
     if ((channelType == 'Channel' && ~text.indexOf(tag)))
     {       
         text = text.replace(tag, '');  
@@ -61,10 +61,10 @@ slack.on('message', function(message) {
   
 });
 
-slack.on('error', function(error) {
+mSlack.on('error', function(error) {
   return console.error("Error: " + error);
 });
 
 
 //Login
-slack.login();
+mSlack.login();
